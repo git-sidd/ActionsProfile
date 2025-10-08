@@ -6,6 +6,7 @@ on:
   pull_request: 
     branches: 
       - main
+  
 
 jobs:
   Build:
@@ -15,6 +16,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Maven Build
         run: mvn install
+
+      
+      
+      - name: Check If Failure
+        if: failure()
+        run: echo "Build Failed"
+
     
   Testing: 
     runs-on: ubuntu-latest
