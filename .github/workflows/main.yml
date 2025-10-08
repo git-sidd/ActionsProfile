@@ -1,8 +1,14 @@
 name: Build WF
 on:
-  push:
-    branches: 
+  # push:
+  #   branches: 
+  #     - main
+  #pull request trigger
+  pull_request:
+    branches:
       - main
+  
+
 jobs:
   Build:
     runs-on: ubuntu-latest
