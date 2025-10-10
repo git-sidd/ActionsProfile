@@ -1,13 +1,14 @@
 name: Build WF
 on:
-  # push:
-  #   branches: 
-  #     - main
+  push:
+    branches: 
+      - main
   #pull request trigger
   pull_request:
     branches:
       - main
-  
+permissions: 
+  contents: read 
 
 jobs:
   Build:
@@ -15,8 +16,19 @@ jobs:
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
+
       - name: Maven Build
         run: mvn install
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vprofile-App
+          path: target/*.war 
+          
+      - name: Notify if Build Fails
+        if: failure()
+        run: echo "Build Failed"
     
   Testing: 
     runs-on: ubuntu-latest
@@ -27,7 +39,7 @@ jobs:
 
       - name: Run tests on main branches
         run: mvn test 
-        
+ 
       - name: Checkstyle
         run: mvn checkstyle:checkstyle
 
