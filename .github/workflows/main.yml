@@ -25,7 +25,7 @@ jobs:
         with:
           name: Vprofile-App
           path: target/*.war 
-          
+
       - name: Notify if Build Fails
         if: failure()
         run: echo "Build Failed"
@@ -39,7 +39,15 @@ jobs:
 
       - name: Run tests on main branches
         run: mvn test 
- 
+      
+      - name: Run Tests on Main Branch 
+        if: github.ref == 'refs/heads/main'
+        run: mvn install
+
+      - name: Run Test rather than main Branch
+        if: github.ref != 'refs/heads/main'
+        run: mvn install
+
       - name: Checkstyle
         run: mvn checkstyle:checkstyle
 
