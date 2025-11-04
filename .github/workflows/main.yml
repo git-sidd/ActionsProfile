@@ -10,8 +10,8 @@ on:
 
   workflow_dispatch:
 
-  schedule:
-    - cron: "10 14 * * 1-5"   # After noon 2:10 pm, Mondat to Friday
+  #schedule:
+  #  - cron: "10 14 * * 1-5"   # After noon 2:10 pm, Mondat to Friday
 
 env:
   ECR_REPOSITORY: 'vprofile-appimg'
